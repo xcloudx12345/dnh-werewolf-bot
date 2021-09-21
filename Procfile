@@ -1,1 +1,1 @@
-web: python3 bot.py & wait -n; while true; do curl google.com; sleep 600; done; wait
+web: while true; do python3 bot.py; curl google.com; sleep 600; done; wait
