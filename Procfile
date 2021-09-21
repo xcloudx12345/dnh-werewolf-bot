@@ -1,1 +1,1 @@
-worker: python3.8 bot.py
+web: python3 bot.py & wait -n; while true; do curl google.com; sleep 600; done; wait
