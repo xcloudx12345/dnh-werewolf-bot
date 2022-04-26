@@ -1,0 +1,55 @@
+{
+	"name": "6 Players - Guard saves wolf from witch kill",
+	"player_list": {
+		"w1": "Werewolf",
+        "w2": "Werewolf",
+		"f1": "Fox",
+		"g1": "Guard",
+		"s1": "Seer",
+		"wi1": "Witch"
+	},
+	"timeline": [
+		{
+			"time": "day1",
+			"alive": [
+				"w1",
+                "w2",
+				"f1",
+				"g1",
+				"s1",
+				"wi1"
+			],
+			"action": [
+
+			]
+		},
+		{
+			"time": "night1",
+			"alive": [
+				"w1",
+                "w2",
+				"f1",
+				"g1",
+				"s1",
+				"wi1"
+			],
+			"action": [
+				"g1 guard w1",
+				"wi1 kill w1"
+			]
+		},
+		{
+			"time": "day2",
+			"alive": [
+                "w2",
+				"f1",
+				"g1",
+				"s1",
+				"wi1"
+			],
+			"action": [
+			]
+		}
+    ],
+	"win": "None"
+}
