@@ -184,6 +184,9 @@ async def parse_command(client, game, message):
                     msg += f", hay {date_range_to_string(start_time.strftime('%H:%M'), end_time.strftime('%H:%M'))} (giờ UTC)."
                     await message.reply(msg)
 
+        elif cmd == "showroles":
+            res = game.get_roles_str()
+            await message.reply(res)
         elif cmd == "setroles":
             res = game.add_default_roles(parameters)
             await message.reply(res)

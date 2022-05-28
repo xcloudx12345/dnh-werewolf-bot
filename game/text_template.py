@@ -74,6 +74,10 @@ def generate_role_list_text(roles_data):
     return f"Danh sách nhân vật trong game: {roles_data}"
 
 
+def generate_hidden_role_list_text():
+    return "Danh sách nhân vật trong game đã được ẩn."
+
+
 def generate_execution_text(voted_user, highest_vote_number):
     if highest_vote_number > 0:
         return "Thời gian quyết định đã hết. " +\

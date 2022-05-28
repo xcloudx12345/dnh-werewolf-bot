@@ -121,6 +121,14 @@ class Game:
         print("Player list:", r)
         return r
 
+    def get_roles_str(self):
+        if not self.modes.get("hidden_role"):
+            # role_list = dict(Counter(v.__class__.__name__ for v in self.players.values()))
+            role_list = ", ".join(f"{k}: {cnt}" for k, cnt in Counter(v.__class__.__name__ for v in self.players.values()))
+            return text_template.generate_role_list_text(role_list)
+        else:
+            return text_template.generate_hidden_role_list_text()
+
     async def start(self, init_players=None):
         if self.is_stopped and self.game_phase == GamePhase.NEW_GAME:
             self.game_phase = GamePhase.DAY
@@ -133,14 +141,11 @@ class Game:
             else:
                 self.players = init_players
 
-            role_list = dict(Counter(v.__class__.__name__ for v in self.players.values()))
-
             await self.create_channel()
             self.read_modes()  # Read json config mode into runtime dict
             await self.interface.send_text_to_channel(text_template.generate_modes(dict(zip(self.modes, map(lambda x: "True", self.modes.values())))), config.GAMEPLAY_CHANNEL)
 
-            if not self.modes.get("hidden_role"):
-                await self.interface.send_text_to_channel(text_template.generate_role_list_text(role_list), config.GAMEPLAY_CHANNEL)
+            await self.interface.send_text_to_channel(self.get_roles_str(), config.GAMEPLAY_CHANNEL)
 
             self.start_time = datetime.datetime.now()
 

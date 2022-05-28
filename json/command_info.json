@@ -39,6 +39,14 @@
     "exclusive_roles": [],
     "required_param_number": 0
   },
+  "showroles": {
+    "description": {
+      "vi": "Hiển thị bảng phân vai của trò chơi hiện tại.",
+      "en": "Display player roles of the current game."
+    },
+    "exclusive_roles": [],
+    "required_param_number": 0
+  },
   "showmodes": {
     "description": {
       "vi": "Hiển thị thiết lập các chế độ chơi",
