@@ -59,7 +59,8 @@ async def delete_category(guild, author, category_name=config.GAME_CATEGORY):
     # Delete category. Any Admin can delete it
     try:
         category = discord.utils.get(guild.categories, name=category_name)
-        assert isinstance(category, discord.CategoryChannel)
+        if not isinstance(category, discord.CategoryChannel):
+            raise AssertionError
         response = f"{author.display_name} deleted channel {category_name}"
         print(response)
         await category.delete()
@@ -102,7 +103,8 @@ async def delete_channel(guild, author, channel_name):
         category = discord.utils.get(guild.categories, name=config.GAME_CATEGORY)
         channel = discord.utils.get(guild.channels, name=channel_name, category=category)
         response = f"{author.display_name} deleted channel {channel_name}"
-        assert isinstance(channel, discord.TextChannel)
+        if not isinstance(channel, discord.TextChannel):
+            raise AssertionError
         print(response)
         # await channel.send(response)
         await channel.delete()
@@ -180,32 +182,40 @@ async def test_admin_command(guild):
     print("-- Testing admin command --")
     user_id = config.DISCORD_TESTING_USER1_ID
     public_user = guild.get_member(user_id)
-    assert isinstance(public_user, discord.Member)
+    if not isinstance(public_user, discord.Member):
+        raise AssertionError
 
     admin_id = config.DISCORD_TESTING_ADMIN1_ID
     admin_user = guild.get_member(admin_id)
-    assert isinstance(admin_user, discord.Member)
+    if not isinstance(admin_user, discord.Member):
+        raise AssertionError
 
     category = await create_category(guild, admin_user, config.GAME_CATEGORY)
-    assert category is not None
+    if category is None:
+        raise AssertionError
 
     channel_name = config.LOBBY_CHANNEL
     channel = await create_channel(guild, admin_user, channel_name, is_public=True)
-    assert channel is not None
-    assert isinstance(channel, discord.TextChannel)
+    if channel is None:
+        raise AssertionError
+    if not isinstance(channel, discord.TextChannel):
+        raise AssertionError
 
     channel_name = config.WEREWOLF_CHANNEL
     channel = await create_channel(guild, admin_user, channel_name, is_public=False)
-    assert channel is not None
+    if channel is None:
+        raise AssertionError
 
     # TEST add/remove user to/from channel
     await add_user_to_channel(guild, public_user, channel_name, is_read=True, is_send=True)
     await asyncio.sleep(2)
-    assert isinstance(discord.utils.get(channel.members, name=public_user.name), discord.Member)
+    if not isinstance(discord.utils.get(channel.members, name=public_user.name), discord.Member):
+        raise AssertionError
     await asyncio.sleep(5)
     await remove_user_from_channel(guild, public_user, channel_name)
     await asyncio.sleep(5)
-    assert discord.utils.get(channel.members, name=public_user.name) is None
+    if discord.utils.get(channel.members, name=public_user.name) is not None:
+        raise AssertionError
 
     # TEST send message to private/public channel
     await send_text_to_channel(guild, "Test sending message in public channel", config.LOBBY_CHANNEL)

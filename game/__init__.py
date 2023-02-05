@@ -581,7 +581,8 @@ class Game:
             await self.do_new_nighttime_phase()
 
     async def end_phase(self):
-        assert self.game_phase != GamePhase.NEW_GAME
+        if self.game_phase == GamePhase.NEW_GAME:
+            raise AssertionError
         if self.game_phase == GamePhase.DAY:
             await self.do_end_daytime_phase()
         elif self.game_phase == GamePhase.NIGHT:
@@ -694,7 +695,8 @@ class Game:
                 )
 
     async def do_player_action(self, cmd, author_id, *targets_id):
-        assert self.players is not None
+        if self.players is None:
+            raise AssertionError
         # print(self.players)
         author = self.players.get(author_id)
         if author is None or not author.is_alive():

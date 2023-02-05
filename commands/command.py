@@ -257,7 +257,8 @@ async def parse_command(client, game, message):
 
 async def test_commands(guild):
     print("Testing admin command")
-    assert isinstance(guild, discord.Guild)
+    if not isinstance(guild, discord.Guild):
+        raise AssertionError
 
     # List all users:
     admin.list_users(guild)
