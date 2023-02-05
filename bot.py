@@ -3,10 +3,11 @@ from commands import command, admin
 from game import *
 import config
 import interface
+import sys
 
 if not config.DISCORD_TOKEN:
     print("Use must setup DISCORD_TOKEN in .env file")
-    exit(1)
+    sys.exit(1)
 # ============ Local functions ============
 
 
