@@ -100,11 +100,11 @@ class Game:
             user_roles = json.loads("".join(role_json_in_string))
             if isinstance(user_roles, list) and all(map(lambda x: isinstance(x, dict), user_roles)):
                 self.runtime_roles = user_roles
-                return f"Config loaded."
-            return f"Invalid json format. Use list of dictionary. Eg in role_config.json"
+                return "Config loaded."
+            return "Invalid json format. Use list of dictionary. Eg in role_config.json"
         except:
             self.runtime_roles = None
-            return f"Invalid json format."
+            return "Invalid json format."
 
     def generate_roles(self, interface, ids, names_dict):
         def dict_to_list(config, number=0):
@@ -324,7 +324,7 @@ class Game:
 
                 if isinstance(author, (roles.Seer, roles.Guard)) and channel_name.startswith("personal"):
                     if author.get_mana() > 0:
-                        author_status = f"Bạn vẫn chưa sử dụng quyền năng của mình :<"
+                        author_status = "Bạn vẫn chưa sử dụng quyền năng của mình :<"
 
             else:
                 author_status = "A con ma 👻"

@@ -238,11 +238,11 @@ def generate_after_voting_guard(user):
 
 
 def generate_invalid_guard_selfprotection():
-    return f"Ai lại chơi tự bảo vệ mình :rage:"
+    return "Ai lại chơi tự bảo vệ mình :rage:"
 
 
 def generate_invalid_guard_yesterdaytarget():
-    return f"Hôm qua bạn đã bảo vệ người này. Hãy đổi mục tiêu khác hôm nay!"
+    return "Hôm qua bạn đã bảo vệ người này. Hãy đổi mục tiêu khác hôm nay!"
 
 
 # Witch
@@ -267,7 +267,7 @@ def generate_before_voting_zombie():
 
 
 def generate_after_zombie_reborn():
-    return f"Bạn đã đội mồ thành công"
+    return "Bạn đã đội mồ thành công"
 
 
 # Cupid
@@ -298,11 +298,11 @@ def generate_couple_died(died_player, follow_player, on_day=True):
 
 # Common
 def generate_out_of_mana():
-    return f"Bạn chỉ sử dụng kỹ năng được 1 lần mỗi đêm!"
+    return "Bạn chỉ sử dụng kỹ năng được 1 lần mỗi đêm!"
 
 
 def generate_out_of_power():
-    return f"Bạn chỉ sử dụng kỹ năng được 1 lần duy nhất!"
+    return "Bạn chỉ sử dụng kỹ năng được 1 lần duy nhất!"
 
 
 def generate_invalid_player_alive(user):
@@ -314,7 +314,7 @@ def generate_killed_text(user):
         return f"Đêm qua, {user} đã bị mất tích một cách bí ẩn.\n" +\
             "===========================================================================\n"
     else:
-        return f"Đêm qua, mọi người đều bình an.\n" +\
+        return "Đêm qua, mọi người đều bình an.\n" +\
             "===========================================================================\n"
 
 
@@ -452,7 +452,7 @@ def generate_timer_remaining_text(seconds):
 
 
 def generate_timer_up_text():
-    return f"⏰ HẾT GIỜ!!!!"
+    return "⏰ HẾT GIỜ!!!!"
 
 
 def generate_help_command_text(command=None):
@@ -472,7 +472,7 @@ def generate_help_command_text(command=None):
             if len(command_exclusive_roles) > 0:
                 command_description += f" Dành riêng cho {', '.join(command_exclusive_roles)}."
             else:
-                command_description += f" Dành cho tất cả mọi người."
+                command_description += " Dành cho tất cả mọi người."
 
             help_embed_data["color"] = 0x17a168
             help_embed_data["title"] += f" for command `{command}`"
@@ -593,7 +593,7 @@ def generate_table(header, data):
 def generate_modes(modes_dict):
     print(modes_dict)
     return "===========================================================================\n" +\
-        f"Chế độ chơi: \n" +\
+        "Chế độ chơi: \n" +\
         f" - 1. Ẩn danh sách các nhân vật đầu game: {'Bật' if modes_dict.get('hidden_role') == 'True' else 'Tắt'}\n" +\
         f" - 2. Tiên tri có thể giết Cáo: {'Bật' if modes_dict.get('seer_can_kill_fox') == 'True'  else 'Tắt'}\n" +\
         f" - 3. Không cho phép Bảo vệ bản thân: {'Bật' if modes_dict.get('prevent_guard_self_protection') == 'True'  else 'Tắt'}\n" +\
@@ -603,7 +603,7 @@ def generate_modes(modes_dict):
 
 
 def generate_mode_disabled():
-    return f"Chế độ này chưa bật"
+    return "Chế độ này chưa bật"
 
 
 def generate_reveal_list(reveal_list):
@@ -616,7 +616,7 @@ def date_range_to_string(start_time, end_time):
     else:
         result = f"từ {start_time} đến "
         if str(end_time) == "00:00:00":
-            result += f"hết ngày"
+            result += "hết ngày"
         else:
             result += f"{end_time}{'' if start_time < end_time else ' ngày hôm sau'}"
     return result
