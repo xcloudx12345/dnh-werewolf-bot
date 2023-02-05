@@ -41,7 +41,8 @@ async def test_case(game, filepath):
         test_case_data = json.load(fi)
 
     try:
-        assert test_case_data is not None
+        if test_case_data is None:
+            raise AssertionError
 
         print(f"\n\n\n====== Begin test case at {filepath} =====")
         print(f"Test case: {test_case_data['name']}")
@@ -65,7 +66,8 @@ async def test_case(game, filepath):
         for timeline_idx, action_data in enumerate(timeline_action_list):
             await asyncio.sleep(DELAY_TIME)
 
-            assert check_alive_players(game, list(map(lambda x: id_map[x], action_data["alive"])), playersname)
+            if not check_alive_players(game, list(map(lambda x: id_map[x], action_data["alive"])), playersname):
+                raise AssertionError
             for action_str in action_data["action"]:
                 author_name, command = action_str.split()[:2]
                 target_name = action_str.split()[2:]
@@ -75,7 +77,8 @@ async def test_case(game, filepath):
 
         await asyncio.sleep(DELAY_TIME)
 
-        assert check_game_end(game, test_case_data.get("win"))
+        if not check_game_end(game, test_case_data.get("win")):
+            raise AssertionError
         if test_case_data.get("win") != "None":
             await game.task_game_loop
         else:
