@@ -889,7 +889,7 @@ class Game:
     async def test_case_real_players(self):
         print("====== Begin test case =====")
         DELAY_TIME = 3
-        real_id = dict((i, x) for i, x in enumerate(config.DISCORD_TESTING_USERS_ID, 1))
+        real_id = {i: x for i, x in enumerate(config.DISCORD_TESTING_USERS_ID, 1)}
         await self.add_player(real_id[1], "w")
         await self.add_player(real_id[2], "s")
         await self.add_player(real_id[3], "v1")
